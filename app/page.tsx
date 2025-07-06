@@ -1,6 +1,6 @@
-/* eslint-disable  @typescript-eslint/no-explicit-any */
-
 "use client";
+/* eslint no-use-before-define: 0 */
+
 
 
 import { useState, useEffect } from "react";
@@ -29,7 +29,7 @@ export default function SubjectDashboard() {
   const [attendance, setAttendance] = useState<AttendanceRecord>({});
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(new Date());
   const [currentWeek, setCurrentWeek] = useState<Date[]>([]);
-
+  
   // Load attendance from sessionStorage
   useEffect(() => {
     const stored = sessionStorage.getItem("attendance");
@@ -37,19 +37,19 @@ export default function SubjectDashboard() {
       setAttendance(JSON.parse(stored));
     }
   }, []);
-
+  
   // Save attendance to sessionStorage
   useEffect(() => {
     sessionStorage.setItem("attendance", JSON.stringify(attendance));
   }, [attendance]);
-
+  
   // Generate current week dates
   useEffect(() => {
     const start = startOfWeek(new Date(), { weekStartsOn: 1 });
     const week = Array.from({ length: 7 }, (_, i) => addDays(start, i));
     setCurrentWeek(week);
   }, []);
-
+  
   const markAttendance = (subject: string, status: "present" | "absent") => {
     if (!selectedDate) return;
     const dateKey = format(selectedDate, "yyyy-MM-dd");
@@ -61,7 +61,7 @@ export default function SubjectDashboard() {
       },
     }));
   };
-
+  
   const calculateStats = (subject: string) => {
     const records = attendance[subject] || {};
     const total = Object.keys(records).length;
@@ -71,7 +71,7 @@ export default function SubjectDashboard() {
     const streak = calculateStreak(subject);
     return { total, attended, percent, canMiss, streak };
   };
-
+  
   const calculateStreak = (subject: string) => {
     const records = attendance[subject] || {};
     const dates = Object.keys(records).sort().reverse();
@@ -82,12 +82,13 @@ export default function SubjectDashboard() {
     }
     return streak;
   };
-
+  
+   
   const isClassDay = (subject: string, date: Date) => {
     const dayOfWeek = date.getDay();
     return subjects[subject].days.includes(dayOfWeek);
   };
-
+  
   const getTodaysClasses = () => {
     const today = new Date();
     return Object.keys(subjects).filter(subject => isClassDay(subject, today));
