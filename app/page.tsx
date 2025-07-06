@@ -39,7 +39,7 @@ export default function SubjectDashboard() {
   
   // Save attendance to sessionStorage
   useEffect(() => {
-    sessionStorage.setItem("attendance", JSON.stringify(attendance));
+    localStorage.setItem("attendance", JSON.stringify(attendance));
   }, [attendance]);
   
   // Generate current week dates
