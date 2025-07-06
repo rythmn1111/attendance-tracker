@@ -1,5 +1,5 @@
 "use client";
-/* eslint no-use-before-define: 0 */
+/* eslint-disable  @typescript-eslint/no-explicit-any */
 
 
 
