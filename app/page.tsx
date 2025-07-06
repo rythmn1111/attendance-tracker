@@ -146,7 +146,7 @@ export default function SubjectDashboard() {
           <div className="mb-8 p-6 bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl shadow-lg">
             <div className="flex items-center space-x-3 mb-3">
               <Clock className="h-5 w-5 text-amber-600" />
-              <h2 className="text-lg font-semibold text-amber-800">Today's Classes</h2>
+              <h2 className="text-lg font-semibold text-amber-800">Today&apos;s Classes</h2>
             </div>
             <div className="flex flex-wrap gap-2">
               {todaysClasses.map(subject => (
