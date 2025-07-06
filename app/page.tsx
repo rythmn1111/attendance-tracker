@@ -11,7 +11,7 @@ import { Progress } from "@/components/ui/progress";
 import { format, startOfWeek, addDays, isToday } from "date-fns";
 import { BookOpen, Calendar as CalendarIcon, TrendingUp, AlertTriangle, Clock } from "lucide-react";
 
-const subjects = {
+const subjects:any = {
   ADA: { name: "Analysis & Design of Algorithm", days: [1, 2, 3, 5], color: "bg-gradient-to-r from-purple-500 to-pink-500", icon: "📊" },
   "UI-UX": { name: "User Interface & Experience", days: [1, 3, 4, 5], color: "bg-gradient-to-r from-blue-500 to-cyan-500", icon: "🎨" },
   CN: { name: "Computer Networks", days: [1, 2, 4, 6], color: "bg-gradient-to-r from-green-500 to-teal-500", icon: "🌐" },
