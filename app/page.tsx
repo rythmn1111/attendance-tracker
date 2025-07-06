@@ -202,7 +202,13 @@ export default function SubjectDashboard() {
           {/* Subjects Grid */}
           <div className="lg:col-span-3">
             <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-              {Object.entries(subjects).map(([subject, config]) => {
+              {Object.entries(subjects).map(([subject, configRaw]) => {
+                const config = configRaw as {
+                  name: string;
+                  days: number[];
+                  color: string;
+                  icon: string;
+                };
                 const { total, attended, percent, canMiss, streak } = calculateStats(subject);
                 const isScheduledToday = selectedDate && isClassDay(subject, selectedDate);
                 const currentStatus = attendance[subject]?.[format(selectedDate!, "yyyy-MM-dd")] || "";
@@ -329,14 +335,22 @@ export default function SubjectDashboard() {
                     <p className="text-sm font-medium">{getDayName(date.getDay())}</p>
                     <p className="text-xs text-gray-600">{format(date, "MMM dd")}</p>
                     <div className="mt-2 space-y-1">
-                      {Object.entries(subjects).map(([subject, config]) => (
-                        isClassDay(subject, date) && (
-                          <div key={subject} className="text-xs px-2 py-1 bg-white rounded-md flex items-center justify-center">
-                            <span className="mr-1">{config.icon}</span>
-                            <span>{subject}</span>
-                          </div>
-                        )
-                      ))}
+                      {Object.entries(subjects).map(([subject, configRaw]) => {
+                        const config = configRaw as {
+                          name: string;
+                          days: number[];
+                          color: string;
+                          icon: string;
+                        };
+                        return (
+                          isClassDay(subject, date) && (
+                            <div key={subject} className="text-xs px-2 py-1 bg-white rounded-md flex items-center justify-center">
+                              <span className="mr-1">{config.icon}</span>
+                              <span>{subject}</span>
+                            </div>
+                          )
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
